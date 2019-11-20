@@ -35,26 +35,22 @@ public class OneShareFriendsMapper extends Mapper<LongWritable, Text, Text, Null
     @Override
     protected void cleanup(Context context) throws IOException, InterruptedException {
 
-        //将TreeMap的key转换成String数组，由于TreeMap的key有序，所以得到的是有序数组
+	//将TreeMap的key转换成String数组，由于TreeMap的key有序，所以得到的是有序数组
 	String[] persons = new String[personFriends.size()];
 	persons = personFriends.keySet().toArray(persons);
 
 	// 5 遍历treeMap集合，
 	for (int i = 0; i < persons.length; i++) {
 	    for (int j = i + 1; j < persons.length; j++) {
-		StringBuilder result = new StringBuilder();
 
-		result.append(persons[i])
-			.append("-")
-			.append(persons[j])
-			.append("\t");
+		String result = persons[i] + "-" + persons[j] + "\t";
 
 		String[] friends1 = personFriends.get(persons[i]);
 		String[] friends2 = personFriends.get(persons[j]);
 		String sameFriends = intersection(friends1, friends2);
 		if (sameFriends.length() > 0) {
-		    result.append(sameFriends);
-		    context.write(new Text(result.toString()), NullWritable.get());
+		    result += sameFriends;
+		    context.write(new Text(result), NullWritable.get());
 		}
 
 	    }
@@ -62,25 +58,21 @@ public class OneShareFriendsMapper extends Mapper<LongWritable, Text, Text, Null
     }
 
     /**
-     * 取两个字符串的交集
+     * 取两个字符串的交集，时间复杂度为O(n)
      *
      * @param string1 数组1
      * @param string2 数组2
      * @return 以字符串的形式返回交集，如:{"A", "E", "D", },{"C", "E", "D", }，返回"E D"
      */
     private String intersection(String[] string1, String[] string2) {
-	Set<String> set = new HashSet<>();
-	Set<String> intersect = new HashSet<>();
-	Collections.addAll(set, string1);
+	Set<String> set1 = new HashSet<>();
+	Collections.addAll(set1, string1);
+	StringBuilder intersect = new StringBuilder();
 	for (String s : string2) {
-	    if (set.contains(s)) {
-		intersect.add(s);
+	    if (set1.contains(s)) {
+		intersect.append(s).append(" ");
 	    }
 	}
-	StringBuilder result = new StringBuilder();
-	for (String str : intersect) {
-	    result.append(str).append(" ");
-	}
-	return result.toString();
+	return intersect.toString();
     }
 }

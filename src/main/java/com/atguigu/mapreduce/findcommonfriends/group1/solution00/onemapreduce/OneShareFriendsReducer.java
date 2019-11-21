@@ -1,4 +1,4 @@
-package com.atguigu.mapreduce.findcommonfriends.solution00.onemapreduce;
+package com.atguigu.mapreduce.findcommonfriends.group1.solution00.onemapreduce;
 
 import java.io.IOException;
 import org.apache.hadoop.io.Text;

@@ -1,8 +1,7 @@
-package com.atguigu.mapreduce.findcommonfriends.solution01;
+package com.atguigu.mapreduce.findcommonfriends.group1.solution00.onemapreduce;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
@@ -14,7 +13,7 @@ public class OneShareFriendsDriver {
 
 	// 输入输出路径需要根据自己电脑上实际的输入输出路径设置
 	args = new String[]{"/Users/jiangren/Documents/便笺/input/z_extendedcase/c_findblogsamefriends/friends.txt"
-		,"/Users/jiangren/Documents/便笺/output/z_extendedcase/c_findblogsamefriends/one_output2"};
+		,"/Users/jiangren/Documents/便笺/output/z_extendedcase/c_findblogsamefriends/one_output"};
 
 	// 1 获取job对象
 	Configuration configuration = new Configuration();
@@ -25,18 +24,15 @@ public class OneShareFriendsDriver {
 
 	// 3 指定map/reduce使用的类
 	job.setMapperClass(OneShareFriendsMapper.class);
-	//job.setReducerClass(OneShareFriendsReducer.class);
+	job.setReducerClass(OneShareFriendsReducer.class);
 
 	// 4 指定map输出的数据类型
 	job.setMapOutputKeyClass(Text.class);
-	job.setMapOutputValueClass(NullWritable.class);
+	job.setMapOutputValueClass(Text.class);
 
 	// 5 指定最终输出的数据类型
 	job.setOutputKeyClass(Text.class);
-	job.setOutputValueClass(NullWritable.class);
-
-	//不需要reducer
-	job.setNumReduceTasks(0);
+	job.setOutputValueClass(Text.class);
 
 	// 6 指定job的输入原始所在目录
 	FileInputFormat.setInputPaths(job, new Path(args[0]));

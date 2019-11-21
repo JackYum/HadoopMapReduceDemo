@@ -1,4 +1,4 @@
-package com.atguigu.mapreduce.findcommonfriends.solution01;
+package com.atguigu.mapreduce.findcommonfriends.group1.solution01;
 
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.NullWritable;

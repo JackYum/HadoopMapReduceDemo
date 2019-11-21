@@ -1,4 +1,4 @@
-package com.atguigu.mapreduce.findcommonfriends.solution03;
+package com.atguigu.mapreduce.findcommonfriends.group1.solution03;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;

@@ -1,4 +1,4 @@
-package com.atguigu.mapreduce.findcommonfriends.solution02;
+package com.atguigu.mapreduce.findcommonfriends.group1.solution02;
 
 import java.io.IOException;
 

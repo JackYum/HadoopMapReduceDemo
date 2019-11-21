@@ -1,4 +1,4 @@
-package com.atguigu.mapreduce.findcommonfriends.solution00.twomapreduce;
+package com.atguigu.mapreduce.findcommonfriends.group1.solution00.twomapreduce;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;

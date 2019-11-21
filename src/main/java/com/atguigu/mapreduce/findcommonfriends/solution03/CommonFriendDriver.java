@@ -12,25 +12,25 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 public class CommonFriendDriver {
 
 	public static void main(String[] args) throws Exception{
-			Configuration configuration = new Configuration();
-	        Job job = Job.getInstance(configuration);
+		Configuration configuration = new Configuration();
+        Job job = Job.getInstance(configuration);
 
-	        job.setJarByClass(CommonFriendDriver.class);
-	        job.setMapperClass(CommonFriendMapper.class);
-	        job.setReducerClass(CommonFriendReducer.class);
+        job.setJarByClass(CommonFriendDriver.class);
+        job.setMapperClass(CommonFriendMapper.class);
+        job.setReducerClass(CommonFriendReducer.class);
 
-	        job.setMapOutputKeyClass(Text.class);
-	        job.setMapOutputValueClass(Text.class);
+        job.setMapOutputKeyClass(Text.class);
+        job.setMapOutputValueClass(Text.class);
 
-	        job.setOutputKeyClass(Text.class);
-	        job.setOutputValueClass(Text.class);
-	        //设置缓存文件
-	        job.addCacheFile(new URI("file:///D:/test/friends/friends01.txt"));
+        job.setOutputKeyClass(Text.class);
+        job.setOutputValueClass(Text.class);
+        //设置缓存文件
+        job.addCacheFile(new URI("file:///D:/test/friends/friends.txt"));
 
-	        FileInputFormat.setInputPaths(job,new Path("D:/test/friends/friends.txt"));
-	        FileOutputFormat.setOutputPath(job,new Path("D:/test/friendsout1"));
+        FileInputFormat.setInputPaths(job,new Path("D:/test/friends/friends.txt"));
+        FileOutputFormat.setOutputPath(job,new Path("D:/test/friendsout4"));
 
-	        job.waitForCompletion(true);
+        job.waitForCompletion(true);
 
 	}
 }

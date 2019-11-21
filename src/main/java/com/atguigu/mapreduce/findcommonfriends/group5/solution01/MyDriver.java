@@ -1,6 +1,4 @@
-package com.examples.test3;
-
-import java.io.IOException;
+package com.atguigu.mapreduce.findcommonfriends.group5.solution01;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;

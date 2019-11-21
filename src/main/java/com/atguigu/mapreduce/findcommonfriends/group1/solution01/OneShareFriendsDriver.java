@@ -36,7 +36,7 @@ public class OneShareFriendsDriver {
 	job.setOutputValueClass(NullWritable.class);
 
 	//不需要reducer
-	job.setNumReduceTasks(0);
+	//job.setNumReduceTasks(0);
 
 	// 6 指定job的输入原始所在目录
 	FileInputFormat.setInputPaths(job, new Path(args[0]));

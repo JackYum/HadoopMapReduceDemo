@@ -1,4 +1,4 @@
-package com.examples.test3;
+package com.atguigu.mapreduce.findcommonfriends.group5.solution01;
 
 import java.io.IOException;
 import java.util.ArrayList;

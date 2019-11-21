@@ -17,7 +17,9 @@ public class CommonFriendReducer extends Reducer<Text, Text, Text, Text> {
         }
         String substring = set.toString().substring(1, set.toString().length()-1);
         context.write(key, new Text(substring));*/
-        String s = "";
+        
+    	//去重，整理
+    	String s = "";
         for (Text value : values) {
             s = value.toString();
         }

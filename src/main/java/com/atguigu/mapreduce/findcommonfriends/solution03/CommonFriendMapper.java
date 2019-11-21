@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CommonFriendMapper extends Mapper<LongWritable,Text,Text,Text> {
-//创建一个全局map 存储缓存表中的数据
+	//创建一个全局map 存储缓存表中的数据
     private Map<String,String> map = Maps.newHashMap();
     @Override
     protected void setup(Context context) throws IOException, InterruptedException {
@@ -26,9 +26,12 @@ public class CommonFriendMapper extends Mapper<LongWritable,Text,Text,Text> {
         //缓存流读取
         BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF-8"));
         String line;
-        //循环读取每行数据，拆分 放入 一个map中
+        //循环读取每行数据，拆分 放入 一个map中0
         while (StringUtils.isNotEmpty(line = br.readLine())){
-            String[] split = line.split(":");
+            //按 ：进行拆分
+        	String[] split = line.split(":");
+           
+            //所有人作为key，好友列表作为value
             map.put(split[0],split[1]);
         }
     }
@@ -37,19 +40,21 @@ public class CommonFriendMapper extends Mapper<LongWritable,Text,Text,Text> {
     protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
 
         String line = value.toString();
+        //把value中的每行数据按 ： 拆分
         String[] lineArr = line.split(":");
         List<String> lineList = Lists.newArrayList();
         //把InputFormat 中读取的数据 进行拆分 ，放入一个集合中，为求 交集做准备
         String[] friends = lineArr[1].split(",");
      
-        for (String friend : friends) {
+        for (String friend : friends) { 
              lineList.add(friend);
         }
         //迭代map 进行比对
         Iterator<Map.Entry<String, String>> entries = map.entrySet().iterator();
+       //遍历map整张表所有数据
         while (entries.hasNext()) {
             Map.Entry<String, String> entry = entries.next();
-            //若是所有人 相同则跳出不进行比对
+            //若是所有人与当前读取数据的key相同则跳出不进行比对
             if (!lineArr[0].equals(entry.getKey())) {
                 //new 一个临时 list 存储当前 key的 值
                 List<Object> temList = Lists.newArrayList();
@@ -67,6 +72,7 @@ public class CommonFriendMapper extends Mapper<LongWritable,Text,Text,Text> {
                     char c1 = entry.getKey().charAt(0);
                     //分条件写出
                     String k;
+                    //排序
                     if (c<c1) {
                         k=lineArr[0]+"-"+entry.getKey();
                     }else {

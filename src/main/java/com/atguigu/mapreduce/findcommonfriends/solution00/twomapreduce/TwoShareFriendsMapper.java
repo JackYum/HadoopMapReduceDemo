@@ -21,7 +21,7 @@ public class TwoShareFriendsMapper extends Mapper<LongWritable, Text, Text, Text
 	String[] persons = friend_persons[1].split(",");
 
 	//人的数组排序，一边后续按照字母顺序输出
-	//Arrays.sort(persons);
+	Arrays.sort(persons);
 
 	for (int i = 0; i < persons.length - 1; i++) {
 
